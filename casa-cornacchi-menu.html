@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Casa Cornacchi Wedding Menu</title>
+<meta name="description" content="Every dish on the Casa Cornacchi 2027 wedding menu with a photo, Liv's tasting plan for the stay, and a shortlist to tick as you decide.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..700&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: Liv's three tasting-meal tickets sit above a photographic menu grid; one 1120px column, 16px gutters, cards 3 / 2 / 1 across. */
+:root{
+  --bg:#ECEBE4;          /* pietra serena: pale grey-green Florentine stone */
+  --surface:#FBFAF6;
+  --fg:#221F1B;
+  --muted:#6B665C;
+  --line:#D6D3C8;
+  --wine:#7A2233;        /* Chianti */
+  --wine-soft:#F1E1E3;
+  --gold:#B5842A;        /* shortlist star */
+  --gold-ink:#1E1A12;
+  --olive:#56653A;
+  --olive-soft:#E3E8D3;
+  --display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --body:"Figtree","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1B1917; --surface:#262320; --fg:#EEE8DC; --muted:#A8A196; --line:#3A3631;
+    --wine:#D97A8C; --wine-soft:#3A2429; --gold:#D9A646; --gold-ink:#1E1A12; --olive:#A6B36F; --olive-soft:#2E3324;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1B1917; --surface:#262320; --fg:#EEE8DC; --muted:#A8A196; --line:#3A3631;
+  --wine:#D97A8C; --wine-soft:#3A2429; --gold:#D9A646; --gold-ink:#1E1A12; --olive:#A6B36F; --olive-soft:#2E3324;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5;padding-inline:16px;padding-block:0 56px;-webkit-font-smoothing:antialiased}
+img{max-width:100%}
+a{color:var(--wine)}
+[hidden]{display:none!important}
+.wrap{max-width:1120px;margin-inline:auto}
+
+.masthead{padding-block:44px 28px;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 14px;font-weight:600}
+h1{font-family:var(--display);font-weight:500;font-size:clamp(36px,5.2vw,58px);line-height:1.04;margin:0 0 14px;text-wrap:balance;letter-spacing:-.01em}
+.lede{max-width:62ch;margin:0;color:var(--muted);font-size:17px}
+h2{font-family:var(--display);font-weight:500;font-size:clamp(26px,3.4vw,36px);margin:0;line-height:1.1;text-wrap:balance}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:36px 18px}
+.sec-head .count{color:var(--muted);font-size:14px;font-variant-numeric:tabular-nums}
+
+/* Liv's plan */
+.plan{padding-block:30px 10px}
+.plan .sec-head{padding-block:0 16px}
+.tickets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:860px){.tickets{grid-template-columns:1fr}}
+.ticket{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--wine);padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.ticket h3{font-family:var(--display);font-size:23px;font-weight:500;margin:0}
+.ticket ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.ticket li{display:grid;grid-template-columns:56px minmax(0,1fr);gap:12px;align-items:center}
+.ticket .thumbbox{width:56px;height:56px;background:var(--olive-soft);border-radius:3px;overflow:hidden}
+.ticket .thumb{width:56px;height:56px;object-fit:cover;display:block}
+.ticket .slot{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--wine);font-weight:700}
+.ticket .dname{font-weight:600;line-height:1.25;display:block;color:inherit;text-decoration:none}
+.ticket .dname:hover{text-decoration:underline}
+.ticket .liv{font-size:12px;color:var(--muted)}
+.plan-note{margin:16px 0 0;font-size:14px;color:var(--muted);max-width:80ch}
+
+/* filters */
+.filters{position:sticky;top:0;z-index:5;background:var(--bg);padding-block:12px;display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-top:8px}
+.chip{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:inherit;font-size:13px;font-weight:600;padding:7px 12px;border-radius:999px;cursor:pointer;font-variant-numeric:tabular-nums}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.chip:focus-visible,.star:focus-visible,.btn:focus-visible,.dname:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.empty{padding:24px 0;color:var(--muted)}
+
+/* menu grid */
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media (max-width:980px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;min-width:0;position:relative;scroll-margin-top:72px}
+.card.starred{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
+.photo{position:relative;aspect-ratio:4/3;max-width:100%;background:var(--olive-soft);overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;color:var(--muted);font-size:13px}
+.ribbon{position:absolute;top:10px;left:10px;background:var(--wine);color:#FFF8F2;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:5px 8px}
+.body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card h3{font-family:var(--display);font-size:22px;font-weight:500;line-height:1.15;margin:0;text-wrap:balance}
+.card p{margin:0;font-size:14.5px;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:3px 7px;border:1px solid var(--line);color:var(--muted)}
+.tag.v{background:var(--olive-soft);color:var(--olive);border-color:transparent}
+.foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:10px;padding-top:10px;border-top:1px solid var(--line)}
+.credit{font-size:12px;color:var(--muted);min-width:0;line-height:1.35}
+.credit a{color:inherit;white-space:nowrap}
+.star{appearance:none;border:1px solid var(--line);background:transparent;color:var(--fg);font:inherit;font-size:13px;font-weight:600;padding:6px 10px;cursor:pointer;white-space:nowrap;display:inline-flex;gap:6px;align-items:center;flex-shrink:0}
+.star[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:var(--gold-ink)}
+
+/* shortlist */
+.shortlist{margin-top:44px;background:var(--surface);border:1px solid var(--line);padding:20px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px 24px;align-items:start}
+@media (max-width:600px){.shortlist{grid-template-columns:1fr}}
+.shortlist h2{font-size:26px}
+.shortlist .sub{margin:6px 0 0;color:var(--muted);font-size:14px}
+.shortlist ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:24px}
+.shortlist li{break-inside:avoid;margin-bottom:4px}
+@media (max-width:600px){.shortlist ul{columns:1}}
+.actions{display:flex;flex-direction:column;gap:8px;align-items:stretch}
+.btn{appearance:none;border:1px solid var(--fg);background:var(--fg);color:var(--bg);font:inherit;font-weight:600;padding:9px 14px;cursor:pointer}
+.btn.secondary{background:transparent;color:var(--fg)}
+.toast{font-size:13px;color:var(--muted);min-height:1.4em}
+textarea{width:100%;min-height:140px;font:inherit;font-size:13px;border:1px solid var(--line);background:var(--bg);color:var(--fg);padding:8px}
+
+footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+footer p{max-width:80ch}
+footer ul{padding-left:18px;columns:2;column-gap:24px;margin:10px 0 0}
+footer li{break-inside:avoid;margin-bottom:4px}
+@media (max-width:600px){footer ul{columns:1}}
+@media (prefers-reduced-motion:no-preference){.chip,.star,.btn{transition:background-color .15s,color .15s,border-color .15s}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Casa Cornacchi · Val d'Ambra, Tuscany · Wedding season 2027</p>
+  <h1>Choosing the wedding menu</h1>
+  <p class="lede">All 21 dishes from the 2027 menu with a photo of each, Liv's suggested tasting plan for the stay, and a shortlist you can tick as you go.</p>
+</header>
+
+<section class="plan" id="plan">
+  <div class="sec-head">
+    <h2>Liv's tasting plan for the stay</h2>
+    <span class="count">10 of 21 dishes</span>
+  </div>
+  <div class="tickets" id="tickets"></div>
+  <p class="plan-note" id="plan-note"></p>
+</section>
+
+<nav class="filters" id="filters" aria-label="Filter dishes"></nav>
+
+<section id="first">
+  <div class="sec-head"><h2>First courses</h2><span class="count" id="count-first"></span></div>
+  <div class="grid" id="grid-first"></div>
+  <p class="empty" id="empty-first" hidden>No first courses match this filter.</p>
+</section>
+
+<section id="mains">
+  <div class="sec-head"><h2>Main courses</h2><span class="count" id="count-main"></span></div>
+  <div class="grid" id="grid-main"></div>
+  <p class="empty" id="empty-main" hidden>No main courses match this filter.</p>
+</section>
+
+<aside class="shortlist" id="shortlist" aria-live="polite">
+  <div>
+    <h2>Your shortlist</h2>
+    <p class="sub" id="shortlist-sub"></p>
+    <ul id="shortlist-list"></ul>
+    <textarea id="shortlist-text" hidden aria-label="Shortlist as text"></textarea>
+  </div>
+  <div class="actions">
+    <button class="btn" id="copy" type="button">Copy shortlist</button>
+    <button class="btn secondary" id="clear" type="button">Clear shortlist</button>
+    <div class="toast" id="toast"></div>
+  </div>
+</aside>
+
+<footer>
+  <p><strong>About the photos.</strong> These are not Casa Cornacchi's own photos. Each card shows a representative photo of the same or a very similar dish, loaded live from Wikimedia Commons. Where the photo is a stand-in, the caption says what it actually shows. Tap any credit to open the file page with the photographer and licence. If a photo does not appear, the device is offline or the file was renamed.</p>
+  <p><strong>Shortlist.</strong> Stars are saved in this browser only, so each of you keeps your own. Use "Copy shortlist" to send yours to the other.</p>
+  <ul id="credits"></ul>
+</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+var MEALS = [
+  {id:"night1", name:"Night 1", slots:["Starter 1","Starter 2","Main 1","Main 2"]},
+  {id:"lunch",  name:"Tasting lunch", slots:["Starter 1","Starter 2","Main"]},
+  {id:"night2", name:"Night 2", slots:["Starter","Main 1","Main 2"]}
+];
+
+/* photos: Wikimedia Commons file names, first one that loads wins. note: what the first photo shows. */
+var DISHES = [
+  {id:"tortelli", course:"first", name:"Game Tortelli with Butter and Sage",
+   desc:"Handmade tortelli filled with pheasant and guinea fowl, tossed in butter and sage and finished with local pecorino.",
+   tags:["Game","Dairy"], flags:["game","dairy"],
+   photos:["Ravioli burro e salvia.jpg","Tortelli d'erbetta.jpg","Tortelli.jpg"], note:"stand-in: ravioli in butter and sage",
+   plan:{meal:"night1", slot:"Starter 1", liv:"Tortelli with pheasant and guinea fowl"}},
+  {id:"duck-pappardelle", course:"first", name:"Pappardelle with Duck Ragù, Wild Fennel and Juniper",
+   desc:"Ancient-grain pappardelle with slow-cooked duck ragù, wild fennel and Valdambra juniper.",
+   tags:["Duck"], flags:["poultry"],
+   photos:["Pappardelle al cinghiale (cropped).jpg","Tagliatelle al ragu Bolognese.jpg"], note:"stand-in: pappardelle with wild boar ragù",
+   plan:{meal:"lunch", slot:"Starter 1", liv:"Duck pappardelle"}},
+  {id:"citrus-risotto", course:"first", name:"Citrus Risotto with Tuscan Red Prawn Tartare",
+   desc:"Risotto with citrus from the estate garden, topped with Tuscan red prawn tartare.",
+   tags:["Shellfish","Raw prawn"], flags:["seafood"],
+   photos:["Risotto alla marinara.jpg","Risotto (1).jpg"], note:"stand-in: seafood risotto",
+   plan:null},
+  {id:"tomato-risotto", course:"first", name:"Costoluto Fiorentino Tomato Risotto with Pesto and Burrata",
+   desc:"Risotto with typical Florentine tomatoes, finished with fresh basil pesto and burrata.",
+   tags:["V","Dairy","Pesto (pine nuts)"], flags:["veg","dairy","nuts"],
+   photos:["Risotto alla napoletana.jpg","Risotto (1).jpg"], note:"stand-in: tomato risotto with provola",
+   plan:null},
+  {id:"tagliolini", course:"first", name:"Tagliolini with Wine Cream, Crispy Rigatino and Pistachio",
+   desc:"Fresh tagliolini with the estate's “Ricolco wine” cream sauce, topped with crispy rigatino (Tuscan cured pork belly) and toasted pistachios.",
+   tags:["Pork","Pistachio","Dairy"], flags:["pork","nuts","dairy"],
+   photos:["Tagliatelle carbonara with basil.jpg","Tajarin al ragù.jpg"], note:"stand-in: creamy tagliatelle with crispy pork",
+   plan:{meal:"night2", slot:"Starter", liv:"Tagliolini with ricolco wine sauce"}},
+  {id:"veal-pappardelle", course:"first", name:"Pappardelle with Veal Ragù and Chianti Spices",
+   desc:"Handmade pappardelle with slow-cooked veal ragù, seasoned with traditional Chianti spices.",
+   tags:["Veal"], flags:["veal"],
+   photos:["Tagliatelle al ragù (image modified).jpg","Tagliatelle al ragu Bolognese.jpg"], note:"stand-in: ribbon pasta with meat ragù",
+   plan:{meal:"night1", slot:"Starter 2", liv:"Pappardelle with veal ragu"}},
+  {id:"pici", course:"first", name:"Pici all'Aglione",
+   desc:"Hand-rolled pici with a traditional Valdichiana tomato sauce made with aglione, the region's giant, mild garlic.",
+   tags:["No meat listed"], flags:["meatfree"],
+   photos:["Pici all'aglione.jpg","Pici with finocchiona (31531968526).jpg"], note:"the same dish",
+   plan:null},
+  {id:"crespelle", course:"first", name:"Crespelle with Porcini Mushrooms",
+   desc:"Delicate crêpes filled with porcini mushrooms, baked with béchamel and Parmigiano.",
+   tags:["V","Dairy"], flags:["veg","dairy"],
+   photos:["Lasagne al forno salsa besciamella.jpg","Tagliatelle ai funghi.jpg"], note:"stand-in: baked pasta with béchamel, similar gratin finish",
+   plan:null},
+  {id:"saffron-risotto", course:"first", name:"Saffron and Sausage Risotto with Vin Santo Reduction",
+   desc:"Saffron risotto with sausage from two heritage Tuscan pig breeds, Cinta Senese and Grigio del Casentino, finished with a Vin Santo del Chianti reduction.",
+   tags:["Pork"], flags:["pork"],
+   photos:["Risotto allo zafferano (5515171837).jpg","Risotto allo zafferano (5515746268).jpg"], note:"saffron risotto, without the sausage",
+   plan:null},
+  {id:"pappa-tortello", course:"first", name:"Pappa al Pomodoro Tortello with Burrata Cream and Confit Cherry Tomatoes",
+   desc:"Handmade tortello filled with “pappa al pomodoro”, the traditional Tuscan tomato and bread soup, served with burrata cream and confit cherry tomatoes.",
+   tags:["V","Dairy"], flags:["veg","dairy"],
+   photos:["Ravioli di burrata a un restaurant italià de Xàbia.jpg","Tortelli.jpg"], note:"stand-in: ravioli with burrata",
+   plan:{meal:"lunch", slot:"Starter 2", liv:"Tortello burrata & tomato"}},
+  {id:"paccheri", course:"first", name:"Paccheri with Seafood Ragù",
+   desc:"Paccheri with a tomato-based fish and shellfish ragù, inspired by cacciucco, Livorno's traditional fish stew.",
+   tags:["Fish","Shellfish"], flags:["seafood"],
+   photos:["Paccheri alle Zucchine e Gamberi - Wiki Loves Sicilia 01.jpg","Paccheri rigati al ragù Napoletano.jpg"], note:"stand-in: paccheri with prawns",
+   plan:null},
+
+  {id:"duck-breast", course:"main", name:"Duck Breast with Mountain Honey and Rosemary",
+   desc:"Pink-cooked duck breast glazed with mountain honey and rosemary, served with buttered spinach and a carrot flan.",
+   tags:["Duck"], flags:["poultry"],
+   photos:["Magret de canard plancha.jpg","Magret.jpg"], note:"pink-cooked duck breast, different sides",
+   plan:null},
+  {id:"porchetta", course:"main", name:"Porchetta-Style Suckling Pig",
+   desc:"Rack of milk-fed pig roasted porchetta-style with Chianti spices, fennel, sage, rosemary, garlic and juniper, served with baked potato, aromatic butter and roasted endive.",
+   tags:["Pork"], flags:["pork"],
+   photos:["Porchetta - A.jpg","Porchetta (3168207946).jpg"], note:"classic porchetta roast",
+   plan:{meal:"lunch", slot:"Main", liv:"Porchetta"}},
+  {id:"guinea-fowl", course:"main", name:"Guinea Fowl with Wild Mushroom Sauce",
+   desc:"Slow-cooked guinea fowl with wild mushroom sauce, Chianti-braised onion and parsley potatoes.",
+   tags:["Guinea fowl"], flags:["poultry"],
+   photos:["Faraona ripiena al forno presentazione.JPG","Flickr preppybyday 4618397089--Chicken cacciatore.jpg"], note:"stand-in: roast guinea fowl, no mushroom sauce",
+   plan:{meal:"night2", slot:"Main 1", liv:"Guinea fowl with mushroom sauce"}},
+  {id:"tagliata-rosemary", course:"main", name:"Beef Tagliata with Rosemary, Juniper and Pepper Oil",
+   desc:"Sliced grilled steak from the estate's free-range cattle, served with an oil infused with rosemary, juniper and black pepper.",
+   tags:["Beef"], flags:["beef"],
+   photos:["La Tagliata.JPG","Bistecca alla fiorentina-01.jpg"], note:"sliced tagliata",
+   plan:{meal:"night1", slot:"Main 1", liv:"Beef tagliata with rosemary"}},
+  {id:"tagliata-vincotto", course:"main", name:"Podolica Beef Tagliata with Vin Cotto Cream",
+   desc:"Sliced grilled steak of Podolica, a heritage Italian cattle breed, served with a vin cotto cream and aromatic spices.",
+   tags:["Beef"], flags:["beef"],
+   photos:["Bistecca alla fiorentina (400gr).jpg","Grilled steak with baked potato and gravy.jpg"], note:"stand-in: grilled Tuscan beef, unsliced",
+   plan:{meal:"night2", slot:"Main 2", liv:"Beef tagliata with wine cream"}},
+  {id:"veal-stew", course:"main", name:"Valdambra Country-Style Veal Stew",
+   desc:"Podolica veal slow-cooked with tomato, garlic, black pepper, seasonal vegetables and herbs, served with potatoes.",
+   tags:["Veal"], flags:["veal"],
+   photos:["Plato de estofado de carne y patatas.jpg","Spezzatino con polenta.jpg"], note:"stand-in: beef stew with potatoes",
+   plan:null},
+  {id:"salt-cod", course:"main", name:"Pan-Fried Salt Cod with Pine Nuts, Raisins and Wild Fennel",
+   desc:"Salt cod with pine nuts, raisins and wild fennel, served with braised escarole and beetroot with parsley.",
+   tags:["Fish","Pine nuts"], flags:["fish","nuts"],
+   photos:["Baccalà e pomodoro.jpg","Baccalà mantecato con polenta La Nuova Perla.jpg"], note:"stand-in: salt cod with tomato",
+   plan:null},
+  {id:"sea-bass", course:"main", name:"Marinated Sea Bass with Olive Pâté and Confit Tomatoes",
+   desc:"Sea bass fillet marinated in citrus and herbs, served with black olive pâté and confit cherry tomatoes.",
+   tags:["Fish"], flags:["fish"],
+   photos:["Dentice con Pomodorini, Arance e Olive.jpg","Filetto di Spigola in Crosta di Patate.jpg","Filetti di Branzino Gratinati.jpg"], note:"stand-in: sea bream with cherry tomatoes and olives",
+   plan:null},
+  {id:"parmigiana", course:"main", name:"Traditional Aubergine Parmigiana",
+   desc:"Layers of fried aubergine, tomato, mozzarella, Parmigiano and basil, baked until golden.",
+   tags:["V","Dairy"], flags:["veg","dairy"],
+   photos:["Parmigiana di melanzane.jpg","Melanzane alla Parmigiana.jpg"], note:"the same dish",
+   plan:{meal:"night1", slot:"Main 2", liv:"Parmigiana"}},
+  {id:"kale-tortino", course:"main", name:"Black Kale and Potato Tortino with Zolfino Bean Cream",
+   desc:"Black kale and potato patty served with a cream of Zolfino beans, a rare heirloom Tuscan variety.",
+   tags:["VG"], flags:["vegan"],
+   photos:["-2021-12-03 Pan fried Bubble and squeak, Trimingham, Norfolk (4).JPG","Gattò di patate 2.jpg"], note:"stand-in: pan-fried potato and greens cake",
+   plan:null}
+];
+
+var COMMONS = "https://commons.wikimedia.org/wiki/";
+function fileUrl(name, width){ return COMMONS + "Special:FilePath/" + encodeURIComponent(name.replace(/ /g,"_")) + "?width=" + width; }
+function pageUrl(name){ return COMMONS + "File:" + encodeURIComponent(name.replace(/ /g,"_")); }
+function byId(id){ return document.getElementById(id); }
+function el(tag, cls, text){ var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+function dish(id){ for (var i=0;i<DISHES.length;i++) if (DISHES[i].id===id) return DISHES[i]; return null; }
+
+/* ---- shortlist state (this browser only) ---- */
+var KEY = "cornacchi-shortlist";
+var starred = {};
+try { JSON.parse(localStorage.getItem(KEY) || "[]").forEach(function(id){ starred[id] = true; }); } catch (e) {}
+function saveStars(){ try { localStorage.setItem(KEY, JSON.stringify(Object.keys(starred))); } catch (e) {} }
+
+/* ---- images with fallback chain ---- */
+function mountImg(img, d, width, onChange){
+  var i = 0;
+  function set(){ img.src = fileUrl(d.photos[i], width); }
+  img.addEventListener("error", function(){
+    i++;
+    if (i < d.photos.length) { set(); if (onChange) onChange(d.photos[i], false); }
+    else { if (onChange) onChange(null, true); }
+  });
+  set();
+}
+
+/* ---- Liv's plan tickets ---- */
+function renderPlan(){
+  var host = byId("tickets");
+  MEALS.forEach(function(m){
+    var t = el("article","ticket");
+    t.appendChild(el("h3", null, m.name));
+    var ol = el("ol");
+    m.slots.forEach(function(slot){
+      var d = null;
+      for (var i=0;i<DISHES.length;i++){ var p = DISHES[i].plan; if (p && p.meal===m.id && p.slot===slot) { d = DISHES[i]; break; } }
+      if (!d) return;
+      var li = el("li");
+      var box = el("div","thumbbox");
+      var img = el("img","thumb"); img.alt = ""; img.loading = "lazy";
+      mountImg(img, d, 160, function(name, exhausted){ if (exhausted) img.remove(); });
+      box.appendChild(img); li.appendChild(box);
+      var txt = el("div");
+      txt.appendChild(el("div","slot",slot));
+      var a = el("a","dname",d.name); a.href = "#card-" + d.id; txt.appendChild(a);
+      txt.appendChild(el("div","liv","Liv wrote: " + d.plan.liv));
+      li.appendChild(txt);
+      ol.appendChild(li);
+    });
+    t.appendChild(ol);
+    host.appendChild(t);
+  });
+  var left = DISHES.filter(function(d){ return !d.plan; }).map(function(d){ return d.name; });
+  byId("plan-note").textContent = "Not on the plan yet: " + left.length + " dishes, including all three risottos, both fish mains, the pici, the crespelle, the seafood paccheri, the duck breast, the veal stew and the vegan kale tortino. Use the “Not on plan” filter below to look them over and decide whether any should swap into a slot. Liv's “beef tagliata with wine cream” is read here as the Podolica tagliata with vin cotto cream.";
+}
+
+/* ---- menu cards ---- */
+var cards = {};
+function renderCards(){
+  DISHES.forEach(function(d){
+    var card = el("article","card"); card.id = "card-" + d.id;
+    var photo = el("div","photo");
+    var img = el("img"); img.alt = d.name + " (representative photo)"; img.loading = "lazy";
+    var ph = el("div","ph","Photo unavailable"); ph.hidden = true;
+    photo.appendChild(img); photo.appendChild(ph);
+    if (d.plan){ var meal = MEALS.filter(function(m){ return m.id===d.plan.meal; })[0]; photo.appendChild(el("span","ribbon", meal.name + " · " + d.plan.slot)); }
+    card.appendChild(photo);
+
+    var body = el("div","body");
+    body.appendChild(el("h3", null, d.name));
+    body.appendChild(el("p", null, d.desc));
+    var tags = el("div","tags");
+    d.tags.forEach(function(t){ var s = el("span","tag" + ((t==="V"||t==="VG")?" v":""), t==="V" ? "Vegetarian" : t==="VG" ? "Vegan" : t); tags.appendChild(s); });
+    body.appendChild(tags);
+
+    var foot = el("div","foot");
+    var credit = el("div","credit");
+    var creditLink = el("a", null, "Photo credit"); creditLink.target = "_blank"; creditLink.rel = "noopener";
+    var creditNote = el("span", null, "");
+    credit.appendChild(creditNote); credit.appendChild(document.createTextNode(" · ")); credit.appendChild(creditLink);
+    function setCredit(name, note){ creditLink.href = pageUrl(name); creditNote.textContent = note; }
+    setCredit(d.photos[0], d.note);
+    mountImg(img, d, 900, function(name, exhausted){
+      if (exhausted) { img.hidden = true; ph.hidden = false; creditNote.textContent = "no photo loaded"; creditLink.href = pageUrl(d.photos[0]); }
+      else setCredit(name, "similar dish");
+    });
+    foot.appendChild(credit);
+
+    var star = el("button","star"); star.type = "button"; star.id = "star-" + d.id;
+    function paintStar(){ var on = !!starred[d.id]; star.setAttribute("aria-pressed", on ? "true" : "false"); star.textContent = on ? "★ Shortlisted" : "☆ Shortlist"; card.classList.toggle("starred", on); }
+    star.addEventListener("click", function(){ if (starred[d.id]) delete starred[d.id]; else starred[d.id] = true; saveStars(); paintStar(); renderShortlist(); applyFilter(); });
+    paintStar();
+    foot.appendChild(star);
+    body.appendChild(foot);
+    card.appendChild(body);
+    cards[d.id] = {card:card, paint:paintStar};
+    byId(d.course === "first" ? "grid-first" : "grid-main").appendChild(card);
+  });
+}
+
+/* ---- filters ---- */
+var FILTERS = [
+  {id:"all", label:"All", test:function(){ return true; }},
+  {id:"plan", label:"On Liv's plan", test:function(d){ return !!d.plan; }},
+  {id:"unplanned", label:"Not on plan", test:function(d){ return !d.plan; }},
+  {id:"veg", label:"Vegetarian or vegan", test:function(d){ return d.flags.indexOf("veg")>=0 || d.flags.indexOf("vegan")>=0; }},
+  {id:"nopork", label:"No pork", test:function(d){ return d.flags.indexOf("pork")<0; }},
+  {id:"noseafood", label:"No fish or shellfish", test:function(d){ return d.flags.indexOf("fish")<0 && d.flags.indexOf("seafood")<0; }},
+  {id:"starred", label:"Shortlisted", test:function(d){ return !!starred[d.id]; }}
+];
+var active = "all";
+function renderFilters(){
+  var host = byId("filters");
+  FILTERS.forEach(function(f){
+    var b = el("button","chip"); b.type = "button"; b.id = "chip-" + f.id; b.dataset.filter = f.id;
+    b.addEventListener("click", function(){ active = f.id; applyFilter(); });
+    host.appendChild(b);
+  });
+}
+function applyFilter(){
+  var f = FILTERS.filter(function(x){ return x.id===active; })[0];
+  var shownFirst = 0, shownMain = 0;
+  DISHES.forEach(function(d){
+    var show = f.test(d);
+    cards[d.id].card.hidden = !show;
+    if (show) { if (d.course==="first") shownFirst++; else shownMain++; }
+  });
+  var totalFirst = DISHES.filter(function(d){ return d.course==="first"; }).length;
+  var totalMain = DISHES.length - totalFirst;
+  byId("count-first").textContent = active==="all" ? totalFirst + " dishes" : shownFirst + " of " + totalFirst;
+  byId("count-main").textContent = active==="all" ? totalMain + " dishes" : shownMain + " of " + totalMain;
+  byId("empty-first").hidden = shownFirst > 0;
+  byId("empty-main").hidden = shownMain > 0;
+  FILTERS.forEach(function(x){
+    var b = byId("chip-" + x.id);
+    var n = DISHES.filter(x.test).length;
+    b.textContent = x.label + " " + n;
+    b.setAttribute("aria-pressed", x.id===active ? "true" : "false");
+  });
+}
+
+/* ---- shortlist panel ---- */
+function shortlistGroups(){
+  var g = {first:[], main:[]};
+  DISHES.forEach(function(d){ if (starred[d.id]) g[d.course].push(d.name); });
+  return g;
+}
+function shortlistText(){
+  var g = shortlistGroups();
+  var lines = ["Casa Cornacchi wedding menu – my shortlist", ""];
+  lines.push("First courses (" + g.first.length + ")");
+  g.first.forEach(function(n){ lines.push("• " + n); });
+  if (!g.first.length) lines.push("• none yet");
+  lines.push("");
+  lines.push("Main courses (" + g.main.length + ")");
+  g.main.forEach(function(n){ lines.push("• " + n); });
+  if (!g.main.length) lines.push("• none yet");
+  return lines.join("\n");
+}
+function renderShortlist(){
+  var g = shortlistGroups();
+  var list = byId("shortlist-list"); list.textContent = "";
+  var total = g.first.length + g.main.length;
+  byId("shortlist-sub").textContent = total === 0
+    ? "Nothing yet. Tap ☆ Shortlist on any dish you want to keep in the running."
+    : g.first.length + " first course" + (g.first.length===1?"":"s") + " and " + g.main.length + " main" + (g.main.length===1?"":"s") + " in the running.";
+  g.first.concat(g.main).forEach(function(n){ list.appendChild(el("li", null, n)); });
+  byId("copy").disabled = total === 0;
+  byId("clear").disabled = total === 0;
+}
+function toast(msg){ var t = byId("toast"); t.textContent = msg; }
+byId("copy").addEventListener("click", function(){
+  var text = shortlistText();
+  var ta = byId("shortlist-text");
+  function fallback(){ ta.hidden = false; ta.value = text; ta.focus(); ta.select(); toast("Copy blocked here. The text is selected above, copy it by hand."); }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function(){ toast("Copied. Paste it to Liv."); }, fallback);
+  } else fallback();
+});
+byId("clear").addEventListener("click", function(){
+  starred = {}; saveStars();
+  Object.keys(cards).forEach(function(id){ cards[id].paint(); });
+  renderShortlist(); applyFilter(); toast("Shortlist cleared.");
+});
+
+/* ---- credits ---- */
+function renderCredits(){
+  var ul = byId("credits");
+  DISHES.forEach(function(d){
+    var li = el("li");
+    li.appendChild(document.createTextNode(d.name + ": "));
+    var a = el("a", null, d.photos[0]); a.href = pageUrl(d.photos[0]); a.target = "_blank"; a.rel = "noopener";
+    li.appendChild(a);
+    ul.appendChild(li);
+  });
+}
+
+renderPlan();
+renderCards();
+renderFilters();
+renderShortlist();
+applyFilter();
+renderCredits();
+})();
+</script>
+</body>
+</html>
